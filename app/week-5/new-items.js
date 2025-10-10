@@ -13,24 +13,27 @@ export default function NewItems() {
       quantity: quantity,
       category: category,
     };
-    console.log(item);
+    console.log("New Item: ", item);
     alert(`Item: ${name}
-      Quantity: ${quantity}
-      Category: ${category}`);
+Quantity: ${quantity}
+Category: ${category}`);
     setName("");
     setQuantity(1);
     setCategory("produce");
   }
   return (
     <div>
-      <header className="text-2xl flex justify-center mr-50 font-bold mt-6">
+      <header className="text-2xl flex justify-center mr-35 font-bold mt-6">
         <h1>Week 5 — New Item</h1>
       </header>
       <section className="flex flex-row justify-center">
-        <div className="ml-10 border-1 border-black bg-white text-gray-600 pt-6 pb-4 pl-4 mt-4 rounded-sm w-100 h-40">
+        <div className="ml-10 border-1 border-black bg-white text-gray-600 pt-6 pb-4 pl-4 mt-4 rounded-sm w-100 h-108 pr-5">
           <form onSubmit={(event) => handleSubmit(event)}>
-            <label htmlFor="name">Item Name</label>
+            <label className="text-gray-200" htmlFor="name">
+              Item Name
+            </label>
             <input
+              className="block border-1 border-gray-200 rounded-sm w-full p-3 text-gray-200"
               type="text"
               required
               id="name"
@@ -38,8 +41,10 @@ export default function NewItems() {
               onChange={(event) => setName(event.target.value)}
               placeholder="eg., milk, 4 L 🥛"
             />
+            <p className="my-3 text-gray-200">Quantity (1-20)</p>
             <p>
-              Quantity: <span className="text-gray-300">{quantity}</span>
+              Quantity:{" "}
+              <span className="text-gray-300 font-bold">{quantity}</span>
             </p>
             <div className="flex gap-4 mt-4 mb-4">
               <div className="flex flex-row justify-center items-center bg-gray-300 p-4 rounded-sm w-10 h-10">
@@ -70,8 +75,12 @@ export default function NewItems() {
                 </button>
               </div>
             </div>
-            <label htmlFor="category">Category</label>
+            <p className="text-gray-500 mb-5">Allowed range: 1-20</p>
+            <label className="text-gray-200" htmlFor="category">
+              Category
+            </label>
             <select
+              className="block border-1 border-gray-200 rounded-sm w-full p-3 text-gray-200 mb-2"
               id="category"
               onChange={(event) => setCategory(event.target.value)}
               value={category}
@@ -88,8 +97,12 @@ export default function NewItems() {
               <option value="household">Household</option>
               <option value="other">Other</option>
             </select>
-            <p className="text-gray-500">Allowed range: 1-20</p>
-            <button type="submit">Add Item</button>
+            <button
+              className="bg-green-600 text-white py-2 px-4 rounded-sm mt-2"
+              type="submit"
+            >
+              Add Item
+            </button>
           </form>
         </div>
       </section>
