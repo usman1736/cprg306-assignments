@@ -3,6 +3,21 @@ import { React, useState } from "react";
 
 export default function NewItems() {
   const [quantity, setQuantity] = useState(1);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("produce");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const item = {
+      name: name,
+      quantity: quantity,
+      category: category,
+    };
+    console.log(item);
+    setName("");
+    setQuantity(1);
+    setCategory("produce");
+  }
   return (
     <div>
       <header className="text-2xl flex justify-center mr-50 font-bold mt-6">
