@@ -15,6 +15,10 @@ export default function Home() {
         →{" "}
         <strong>
           <Link href="/week-4">Week 4</Link>
+        </strong>{" "}
+        →{" "}
+        <strong>
+          <Link href={"/week-5"}>Week 5</Link>
         </strong>
       </p>
     </main>
