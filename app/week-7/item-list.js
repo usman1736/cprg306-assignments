@@ -2,24 +2,21 @@
 import { useState } from "react";
 import Item from "./item";
 
-export default function ItemList({ itemList }) {
-  const [itemsList, setItemsList] = useState([...itemList]);
+export default function ItemList({ passingItems }) {
   const [sortBy, setSortBy] = useState("name");
 
-  function sortByName() {
-    const nameSorted = [...itemsList].sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
-    setItemsList(nameSorted);
-    setSortBy("name");
-  }
+  const sortedArr = [...passingItems].sort((a, b) =>
+    sortBy === "name"
+      ? a.name.localeCompare(b.name)
+      : a.category.localeCompare(b.category)
+  );
 
   function sortByCategory() {
-    const categorySorted = [...itemsList].sort((a, b) =>
-      a.category.localeCompare(b.category)
-    );
-    setItemsList(categorySorted);
     setSortBy("category");
+  }
+
+  function sortByName() {
+    setSortBy("name");
   }
 
   return (
@@ -43,9 +40,10 @@ export default function ItemList({ itemList }) {
           Category
         </button>
       </div>
-      {itemsList.map((item) => (
+
+      {sortedArr.map((item, index) => (
         <Item
-          key={item.id}
+          key={index}
           name={item.name}
           quantity={item.quantity}
           category={item.category}

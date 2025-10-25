@@ -17,7 +17,7 @@ export default function Page() {
       </header>
       <NewItems onAddItem={handleAddItem} />
       <div>
-        <ItemList itemList={items} />
+        <ItemList passingItems={items} />
       </div>
     </main>
   );

@@ -9,7 +9,6 @@ export default function NewItems({ onAddItem }) {
   function handleSubmit(event) {
     event.preventDefault();
     const item = {
-      id: 4,
       name: name,
       quantity: quantity,
       category: category,
@@ -52,9 +51,7 @@ export default function NewItems({ onAddItem }) {
                   className="text-gray-500"
                   onClick={() =>
                     setQuantity(
-                      (quantity > 1) & (quantity <= 20)
-                        ? quantity - 1
-                        : quantity
+                      quantity > 1 && quantity <= 20 ? quantity - 1 : quantity
                     )
                   }
                 >
