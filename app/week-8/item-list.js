@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Item from "./item";
 
-export default function ItemList({ passingItems }) {
+export default function ItemList({ passingItems = [], onItemSelect }) {
   const [sortBy, setSortBy] = useState("name");
 
   const sortedArr = [...passingItems].sort((a, b) =>
@@ -26,16 +26,18 @@ export default function ItemList({ passingItems }) {
         <button
           onClick={sortByName}
           className={`rounded-sm px-2 py-1 ${
-            sortBy === "name" ? "bg-blue-700" : "bg-white"
-          }  ${sortBy === "name" ? "text-white" : "text-black"}`}
+            sortBy === "name" ? "bg-blue-700 text-white" : "bg-white text-black"
+          }`}
         >
           Name
         </button>
         <button
-          className={`rounded-sm px-2 py-1 ${
-            sortBy === "category" ? "bg-blue-600" : "bg-white"
-          }  ${sortBy === "category" ? "text-white" : " text-black"}  `}
           onClick={sortByCategory}
+          className={`rounded-sm px-2 py-1 ${
+            sortBy === "category"
+              ? "bg-blue-600 text-white"
+              : "bg-white text-black"
+          }`}
         >
           Category
         </button>
@@ -43,10 +45,13 @@ export default function ItemList({ passingItems }) {
 
       {sortedArr.map((item, index) => (
         <Item
-          key={index}
+          key={
+            item.id ?? `${item.name}-${item.category}-${item.quantity}-${index}`
+          }
           name={item.name}
           quantity={item.quantity}
           category={item.category}
+          onSelect={onItemSelect}
         />
       ))}
     </div>
