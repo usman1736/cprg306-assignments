@@ -22,7 +22,7 @@ export default function NewItems({ onAddItem }) {
   return (
     <div>
       <header className="text-2xl flex font-bold mt-6 md:ml-80 ml-170">
-        <h1>Week 5 — New Item</h1>
+        <h1>Week 7 — New Item</h1>
       </header>
       <section className="ml-170 md:ml-70 mb-5">
         <div className="ml-10 border-1 border-black bg-white text-gray-600 pt-6 pb-4 pl-4 mt-4 rounded-sm w-100 h-108 pr-5">
