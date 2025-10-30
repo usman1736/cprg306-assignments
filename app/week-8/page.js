@@ -38,7 +38,7 @@ export default function Page() {
   return (
     <main>
       <header className="flex ml-170 md:ml-80">
-        <h1 className="text-2xl font-bold my-3">Shopping List</h1>
+        <h1 className="text-2xl font-bold my-3">Shopping List + Meal Ideas</h1>
       </header>
 
       <div className="flex flex-col lg:flex-row">
