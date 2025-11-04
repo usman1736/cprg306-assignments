@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Item from "./item";
 
-export default function ItemList({ passingItems }) {
+export default function ItemList({ passingItems, onItemSelect }) {
   const [sortBy, setSortBy] = useState("name");
 
   const sortedArr = [...passingItems].sort((a, b) =>
@@ -43,6 +43,7 @@ export default function ItemList({ passingItems }) {
 
       {sortedArr.map((item, index) => (
         <Item
+          onClick={onItemSelect}
           key={index}
           name={item.name}
           quantity={item.quantity}
