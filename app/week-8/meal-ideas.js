@@ -4,15 +4,14 @@ import { useState, useEffect } from "react";
 
 function MealIdeas({ ingredient }) {
   const [meals, setMeals] = useState([]);
-  const [ingredient, setIngredient] = useState("");
 
   async function fetchMealIdeas(ingredient) {
     try {
       const response = await fetch(
-        ` https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
       );
-      const data = response.json();
-      setMeals(data.meals);
+      const data = await response.json();
+      setMeals(data.meals ?? []);
     } catch (error) {
       console.log(error.message);
     }
@@ -21,9 +20,12 @@ function MealIdeas({ ingredient }) {
   function loadMealIdeas(ingredient) {
     fetchMealIdeas(ingredient);
   }
-
   useEffect(() => {
-    loadMealIdeas(ingredient);
+    if (!ingredient) {
+      setMeals([]);
+    } else {
+      loadMealIdeas(ingredient);
+    }
   }, [ingredient]);
 
   if (!ingredient) {
@@ -38,13 +40,18 @@ function MealIdeas({ ingredient }) {
   }
 
   return (
-    <div>
+    <div className="mt-10">
       {meals.length > 0 ? (
         <header>
-          <h2>Meal Ideas for "{ingredient}"</h2>
-          <ul>
+          <h2 className="text-xl font-bold">Meal Ideas for "{ingredient}"</h2>
+          <ul className="grid grid-cols-2 gap-3">
             {meals.map((item) => (
-              <li key={item.idMeal}>{item.strName}</li>
+              <li
+                className="flex border-1 rounded-sm border-white  p-2 "
+                key={item.idMeal}
+              >
+                {item.strMeal}
+              </li>
             ))}
           </ul>
         </header>

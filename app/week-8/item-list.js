@@ -21,7 +21,7 @@ export default function ItemList({ passingItems, onItemSelect }) {
 
   return (
     <div>
-      <div className="flex flex-row gap-2 items mb-5 md:ml-80">
+      <div className="flex flex-row gap-2 items mb-5 md:ml-1">
         <p className="text-gray-700">Sort by: </p>
         <button
           onClick={sortByName}
@@ -43,11 +43,11 @@ export default function ItemList({ passingItems, onItemSelect }) {
 
       {sortedArr.map((item, index) => (
         <Item
-          onClick={onItemSelect}
           key={index}
           name={item.name}
           quantity={item.quantity}
           category={item.category}
+          onSelect={() => onItemSelect(item.name)}
         />
       ))}
     </div>
