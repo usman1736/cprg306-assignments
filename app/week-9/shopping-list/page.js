@@ -4,10 +4,12 @@ import NewItems from "./new-items";
 import itemData from "./items.json";
 import MealIdeas from "./meal-ideas";
 import { useState } from "react";
+import { useUserAuth } from "@/app/context/AuthContext";
 
 export default function Page() {
   const [items, setItems] = useState([...itemData]);
   const [selectedItemName, setSelectedItemName] = useState("");
+  const { user } = useUserAuth();
 
   function handleItemSelect(selectedItem) {
     setSelectedItemName(cleanName(selectedItem));
@@ -29,6 +31,16 @@ export default function Page() {
   function handleAddItem(item) {
     setItems([...items, item]);
   }
+
+  if (!user) {
+    return (
+      <main>
+        <p>Access denied</p>
+        <p>Login and try again</p>
+      </main>
+    );
+  }
+
   return (
     <main>
       <header className="flex ml-100 md:ml-1">
