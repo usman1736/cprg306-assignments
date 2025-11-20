@@ -1,15 +1,25 @@
 "use client";
 import ItemList from "./item-list";
 import NewItems from "./new-items";
-import itemData from "./items.json";
 import MealIdeas from "./meal-ideas";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getItems } from "../_services/shopping-list-services";
+import { addItem } from "../_services/shopping-list-services";
 import { useUserAuth } from "@/app/context/AuthContext";
 
 export default function Page() {
-  const [items, setItems] = useState([...itemData]);
+  const [items, setItems] = useState([]);
   const [selectedItemName, setSelectedItemName] = useState("");
   const { user } = useUserAuth();
+
+  const loadItems = async () => {
+    try {
+      const shoppingList = await getItems(user.uid);
+      setItems(shoppingList);
+    } catch (error) {
+      console.error(`Error getting items for the user: ${user.uid}`, error);
+    }
+  };
 
   function handleItemSelect(selectedItem) {
     setSelectedItemName(cleanName(selectedItem));
@@ -28,9 +38,11 @@ export default function Page() {
     return cleaned.trim();
   }
 
-  function handleAddItem(item) {
+  const handleAddItem = async (item) => {
+    const id = await addItem(user.uid, item);
+    const addedItem = { id, ...item };
     setItems([...items, item]);
-  }
+  };
 
   if (!user) {
     return (
@@ -40,6 +52,10 @@ export default function Page() {
       </main>
     );
   }
+
+  useEffect(() => {
+    loadItems();
+  }, [user]);
 
   return (
     <main>

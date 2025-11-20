@@ -13,7 +13,7 @@ export const getItems = async (userId) => {
   }
 };
 
-const addItem = async (userId, item) => {
+export const addItem = async (userId, item) => {
   try {
     const addedItem = await addDoc(collection(db, "user", userId, "items"), {
       name: item,
